@@ -1,0 +1,11 @@
+[project]
+name = "qrcoder"
+version = "0.1.0"
+description = "QR Code Generation Web Tool"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "flask>=3.0",
+    "qrcode[pil]>=7.4",
+    "pillow>=10.0",
+]

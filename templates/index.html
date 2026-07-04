@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码生成工具</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>二维码生成工具</h1>
+
+        <div class="main-layout">
+            <!-- Left: Input Panel -->
+            <div class="input-panel">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" data-tab="text">文本输入</button>
+                    <button class="tab" data-tab="file">文件上传</button>
+                </div>
+
+                <!-- Text Input Pane -->
+                <div id="text-pane" class="pane active">
+                    <textarea id="text-input" placeholder="请输入要生成二维码的文本内容...&#10;支持中文、日文、英文、换行" rows="14"></textarea>
+                </div>
+
+                <!-- File Upload Pane -->
+                <div id="file-pane" class="pane">
+                    <div class="file-upload-area">
+                        <label for="file-input" class="file-label">选择文本文件</label>
+                        <input type="file" id="file-input" accept=".txt,.text,.md,.csv,.json,.log,.xml,.html,.yaml,.yml">
+                        <div id="file-info" class="file-info"></div>
+                    </div>
+                    <textarea id="file-content-preview" placeholder="文件内容预览..." rows="10" readonly style="display:none;"></textarea>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="actions">
+                    <button id="generate-btn" class="btn-primary">生成二维码</button>
+                </div>
+
+                <!-- Message Area -->
+                <div id="message" class="message" style="display:none;"></div>
+            </div>
+
+            <!-- Right: QR Display Panel -->
+            <div class="qr-panel">
+                <h2>二维码结果</h2>
+                <div id="qr-area" class="qr-area">
+                    <div id="qr-placeholder" class="qr-placeholder">
+                        点击「生成二维码」查看结果
+                    </div>
+                    <div id="qr-content" class="qr-content" style="display:none;">
+                        <div class="qr-display">
+                            <img id="qr-image" src="" alt="二维码">
+                        </div>
+                        <div class="pagination">
+                            <button id="prev-btn" class="btn-secondary" disabled>上一张</button>
+                            <span id="page-info" class="page-info"></span>
+                            <button id="next-btn" class="btn-secondary" disabled>下一张</button>
+                        </div>
+                        <div id="qr-meta" class="qr-meta"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
