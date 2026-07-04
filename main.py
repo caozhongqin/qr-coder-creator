@@ -1,5 +1,6 @@
 """Flask web application for QR code generation."""
 
+import argparse
 import threading
 import webbrowser
 
@@ -12,11 +13,14 @@ app = Flask(__name__)
 # Max input size: 100KB
 MAX_INPUT_BYTES = 100 * 1024
 
+# Initial text passed from command line (for auto-generation)
+init_text = ""
+
 
 @app.route("/")
 def index():
     """Serve the main UI page."""
-    return render_template("index.html")
+    return render_template("index.html", init_text=init_text)
 
 
 @app.route("/api/generate", methods=["POST"])
@@ -70,6 +74,19 @@ def open_browser():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="QR Code Generator")
+    parser.add_argument(
+        "--text-file",
+        dest="text_file",
+        default=None,
+        help="Path to a text file for auto-generation on startup",
+    )
+    args = parser.parse_args()
+
+    if args.text_file:
+        with open(args.text_file, "r", encoding="utf-8") as f:
+            init_text = f.read()
+
     # Open browser after a short delay to ensure server is ready
     threading.Timer(1.0, open_browser).start()
     app.run(host="127.0.0.1", port=5000, debug=False)

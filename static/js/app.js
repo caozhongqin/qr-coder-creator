@@ -193,3 +193,14 @@ document.addEventListener("keydown", (e) => {
         showQRPage(currentPage);
     }
 });
+
+// Auto-generate if init text was passed from command line
+if (window.QRCODER_INIT_TEXT && window.QRCODER_INIT_TEXT.length > 0) {
+    // Ensure text tab is active
+    document.querySelector('.tab[data-tab="text"]').click();
+    document.getElementById("text-input").value = window.QRCODER_INIT_TEXT;
+    // Auto-click generate after a short delay
+    setTimeout(() => {
+        document.getElementById("generate-btn").click();
+    }, 300);
+}
